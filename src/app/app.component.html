@@ -12,27 +12,35 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2 add-todo-form">
-            <form class="form-inline">
-              <!--<label class="sr-only" for="inlineFormInputName2">Name</label>-->
-              <input type="text" class="form-control  ml-sm-2" id="inlineFormInputName2" placeholder="Title">
-
-              <!--<label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>-->
-              <input type="text" class="form-control  ml-sm-2" id="inlineFormInputGroupUsername2" placeholder="Description">
-
-              <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>-->
-              <select class="custom-select ml-sm-2" id="inlineFormCustomSelectPref">
+            <form class="form-inline" #frm="ngForm" (ngSubmit)="onTodoAddFormSubmitted(frm)">
+              <input type="text"
+                     class="form-control  ml-sm-2"
+                     placeholder="Title"
+                     name="title"
+                     ngModel
+                     required>
+              <input type="text"
+                     class="form-control  ml-sm-2"
+                     placeholder="Description"
+                     name="description"
+                     ngModel
+                     required>
+              <select class="custom-select ml-sm-2"
+                      name="category"
+                      ngModel
+                      required>
                 <option selected>Category...</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
               </select>
 
-              <button type="submit" class="btn btn-primary  ml-sm-2">Add</button>
+              <button type="submit" class="btn btn-primary  ml-sm-2" [disabled]="!frm.valid">Add</button>
             </form>
           </div>
           <div class="col-md-12 list-todos text-left">
             <ul>
-              <li class="row">
+              <li *ngFor="let todo of todoList" class="row">
                 <div class="col-md-1 todo-categ-icon">
                   <i class="fa fa-3x fa-home"></i>
                 </div>
@@ -40,14 +48,12 @@
                   <div class="row">
                     <div class="col-md-12">
                       <span class="todo-title">
-                        How mutual fund SIPs help investors buy low and sell high despite unpredictability of stock market
+                        {{todo.title}}
                       </span>
                     </div>
                     <div class="col-md-12">
                       <p  class="todo-description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley
+                        {{todo.description}}
                       </p>
                     </div>
                   </div>
@@ -57,56 +63,56 @@
                   <button class="btn btn-danger">Delete</button>
                 </div>
               </li>
-              <li class="row">
-                <div class="col-md-1 todo-categ-icon">
-                  <i class="fa fa-3x fa-home"></i>
-                </div>
-                <div class="col-md-9 todo-details">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <span class="todo-title">
-                        How mutual fund SIPs help investors buy low and sell high despite unpredictability of stock market
-                      </span>
-                    </div>
-                    <div class="col-md-12">
-                      <p  class="todo-description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2 todo-actions mt-4">
-                  <button class="btn btn-warning">Edit</button>
-                  <button class="btn btn-danger">Delete</button>
-                </div>
-              </li>
-              <li class="row">
-                <div class="col-md-1 todo-categ-icon">
-                  <i class="fa fa-3x fa-home"></i>
-                </div>
-                <div class="col-md-9 todo-details">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <span class="todo-title">
-                        How mutual fund SIPs help investors buy low and sell high despite unpredictability of stock market
-                      </span>
-                    </div>
-                    <div class="col-md-12">
-                      <p  class="todo-description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2 todo-actions mt-4">
-                  <button class="btn btn-warning">Edit</button>
-                  <button class="btn btn-danger">Delete</button>
-                </div>
-              </li>
+              <!--<li class="row">-->
+                <!--<div class="col-md-1 todo-categ-icon">-->
+                  <!--<i class="fa fa-3x fa-home"></i>-->
+                <!--</div>-->
+                <!--<div class="col-md-9 todo-details">-->
+                  <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                      <!--<span class="todo-title">-->
+                        <!--How mutual fund SIPs help investors buy low and sell high despite unpredictability of stock market-->
+                      <!--</span>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12">-->
+                      <!--<p  class="todo-description">-->
+                        <!--Lorem Ipsum is simply dummy text of the printing and typesetting industry.-->
+                        <!--Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,-->
+                        <!--when an unknown printer took a galley-->
+                      <!--</p>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2 todo-actions mt-4">-->
+                  <!--<button class="btn btn-warning">Edit</button>-->
+                  <!--<button class="btn btn-danger">Delete</button>-->
+                <!--</div>-->
+              <!--</li>-->
+              <!--<li class="row">-->
+                <!--<div class="col-md-1 todo-categ-icon">-->
+                  <!--<i class="fa fa-3x fa-home"></i>-->
+                <!--</div>-->
+                <!--<div class="col-md-9 todo-details">-->
+                  <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                      <!--<span class="todo-title">-->
+                        <!--How mutual fund SIPs help investors buy low and sell high despite unpredictability of stock market-->
+                      <!--</span>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12">-->
+                      <!--<p  class="todo-description">-->
+                        <!--Lorem Ipsum is simply dummy text of the printing and typesetting industry.-->
+                        <!--Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,-->
+                        <!--when an unknown printer took a galley-->
+                      <!--</p>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2 todo-actions mt-4">-->
+                  <!--<button class="btn btn-warning">Edit</button>-->
+                  <!--<button class="btn btn-danger">Delete</button>-->
+                <!--</div>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>

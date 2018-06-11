@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular Todo List';
+  todoList =  []
+
+    onTodoAddFormSubmitted(f){
+      this.todoList = [f.value,...this.todoList];
+
+      f.reset();
+    }
 }
