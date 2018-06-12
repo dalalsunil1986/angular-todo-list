@@ -35,6 +35,7 @@
     margin-bottom: 5px;
     //color: #CC0032;
     color: #16a085;
+    cursor: pointer;
 }
 
 #todo-list .content .list-todos .todo-actions button{

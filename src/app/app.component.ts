@@ -1,17 +1,59 @@
-import { Component } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {Todo} from "./services/todo";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Angular Todo List';
-  todoList =  []
+export class AppComponent implements OnInit {
+    title = 'Angular Todo List';
 
-    onTodoAddFormSubmitted(f){
-      this.todoList = [f.value,...this.todoList];
+    todoList = []
+    @ViewChild("frm") frm: NgForm
 
-      f.reset();
+    formData = {
+        "title": "",
+        "description": "",
+        "category": "",
+    }
+
+    constructor(private todoService:Todo){}
+
+    ngOnInit() {
+        this.getTodos()
+    }
+
+    onTodoAddFormSubmitted(f) {
+        this.todoList = [f.value, ...this.todoList];
+
+        console.log(this.formData);
+
+        this.todoService.add(f.value)
+            .subscribe(
+                response => {
+                    console.log(response)
+
+                    this.frm.resetForm();
+                    this.frm.setValue(this.formData)
+                },
+                error => console.log(error)
+            )
+    }
+
+    getTodos(){
+        this.todoService.get()
+            .subscribe(
+                response => { console.log(response); this.todoList = [...this.todoList,...response]},
+                error => console.log(error)
+            )
+    }
+
+    updateTodo(todo){
+        this.todoService.update(todo).subscribe(
+            response => console.log(response),
+            error => console.log(error)
+        )
     }
 }
