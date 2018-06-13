@@ -25,4 +25,8 @@ export class Todo{
     update(todo){
         return this.http.put('https://angular-todo-list-b9867.firebaseio.com/todos/'+todo.id+".json",todo);
     }
+
+    delete(todo){
+        return this.http.delete('https://angular-todo-list-b9867.firebaseio.com/todos/'+todo.id+".json");
+    }
 }

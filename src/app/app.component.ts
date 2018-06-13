@@ -56,4 +56,14 @@ export class AppComponent implements OnInit {
             error => console.log(error)
         )
     }
+
+    deleteTodo(todo){
+        if(confirm("Are you sure to delete the selected todo?")) {
+            this.todoList = this.todoList.filter(t => t.id !== todo.id)
+            this.todoService.delete(todo).subscribe(
+                response => console.log(response),
+                error => console.log(error)
+            )
+        }
+    }
 }

@@ -40,7 +40,7 @@
           </div>
           <div class="col-md-12 list-todos text-left">
             <ul>
-              <li *ngFor="let todo of todoList" class="row">
+              <li *ngFor="let todo of todoList" class="row" (mouseenter)="todo.showAction = true" (mouseleave)="todo.showAction = false">
                 <div class="col-md-1 todo-categ-icon">
                   <i class="fa fa-3x fa-home" *ngIf="todo.category==1"></i>
                   <i class="fa fa-3x fa-building" *ngIf="todo.category==2"></i>
@@ -62,10 +62,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3 todo-actions mt-2">
+                <div class="col-md-3 todo-actions mt-2 text-right" *ngIf="todo.showAction">
                   <button class="btn btn-warning" *ngIf="todo.inEditMode!==true" (click)="todo.inEditMode=true" >Edit</button>
                   <button class="btn btn-success" *ngIf="todo.inEditMode===true" (click)="todo.inEditMode=false; updateTodo(todo)" >Update</button>
-                  <button class="btn btn-danger">Delete</button>
+                  <button class="btn btn-danger" (click)="deleteTodo(todo)">Delete</button>
                 </div>
               </li>
               <!--<li class="row">-->
