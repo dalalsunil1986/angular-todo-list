@@ -38,6 +38,16 @@
     cursor: pointer;
 }
 
+#todo-list .content .list-todos .todo-title.done{
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+#todo-list .content .list-todos .todo-description.done{
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
 #todo-list .content .list-todos .todo-actions button{
     margin-left: 5px;
 }

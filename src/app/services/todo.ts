@@ -23,7 +23,11 @@ export class Todo{
     }
 
     update(todo){
-        return this.http.put('https://angular-todo-list-b9867.firebaseio.com/todos/'+todo.id+".json",todo);
+        const td = {...todo}
+        delete td["showAction"]
+        delete td["in_edit_mode"]
+
+        return this.http.put('https://angular-todo-list-b9867.firebaseio.com/todos/'+todo.id+".json",td);
     }
 
     delete(todo){

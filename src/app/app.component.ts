@@ -26,14 +26,13 @@ export class AppComponent implements OnInit {
     }
 
     onTodoAddFormSubmitted(f) {
-        this.todoList = [f.value, ...this.todoList];
-
-        console.log(this.formData);
-
         this.todoService.add(f.value)
             .subscribe(
                 response => {
-                    console.log(response)
+                    const todo = {...f.value,id:response["name"]}
+                    console.log(todo)
+
+                    this.todoList = [todo, ...this.todoList];
 
                     this.frm.resetForm();
                     this.frm.setValue(this.formData)
@@ -51,6 +50,7 @@ export class AppComponent implements OnInit {
     }
 
     updateTodo(todo){
+        console.log(todo);
         this.todoService.update(todo).subscribe(
             response => console.log(response),
             error => console.log(error)
@@ -65,5 +65,10 @@ export class AppComponent implements OnInit {
                 error => console.log(error)
             )
         }
+    }
+
+    markAsDone(todo){
+        todo.is_marked_done = true
+        this.updateTodo(todo)
     }
 }

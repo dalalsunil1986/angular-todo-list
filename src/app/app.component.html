@@ -46,26 +46,27 @@
                   <i class="fa fa-3x fa-building" *ngIf="todo.category==2"></i>
                   <i class="fab fa-3x fa-react" *ngIf="todo.category==3"></i>
                 </div>
-                <div class="col-md-8 todo-details">
+                <div class="col-md-7 todo-details">
                   <div class="row">
                     <div class="col-md-12">
-                      <span class="todo-title" *ngIf="!todo.inEditMode" (click)="todo.inEditMode=true">
+                      <span class="todo-title" [ngClass]="{'done':todo.is_marked_done}" *ngIf="!todo.in_edit_mode" (click)="todo.in_edit_mode=true">
                         {{todo.title}}
                       </span>
-                      <input type="text" [value]="todo.title" [(ngModel)]="todo.title" *ngIf="todo.inEditMode">
+                      <input type="text" [value]="todo.title" [(ngModel)]="todo.title" *ngIf="todo.in_edit_mode">
                     </div>
                     <div class="col-md-12">
-                      <p  class="todo-description" *ngIf="!todo.inEditMode" (click)="todo.inEditMode=true">
+                      <p  class="todo-description" [ngClass]="{'done':todo.is_marked_done}" *ngIf="!todo.in_edit_mode" (click)="todo.in_edit_mode=true">
                         {{todo.description}}
                       </p>
-                      <input type="text" class="col-md-10" [value]="todo.description" [(ngModel)]="todo.description" *ngIf="todo.inEditMode">
+                      <input type="text" class="col-md-10" [value]="todo.description" [(ngModel)]="todo.description" *ngIf="todo.in_edit_mode">
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3 todo-actions mt-2 text-right" *ngIf="todo.showAction">
-                  <button class="btn btn-warning" *ngIf="todo.inEditMode!==true" (click)="todo.inEditMode=true" >Edit</button>
-                  <button class="btn btn-success" *ngIf="todo.inEditMode===true" (click)="todo.inEditMode=false; updateTodo(todo)" >Update</button>
-                  <button class="btn btn-danger" (click)="deleteTodo(todo)">Delete</button>
+                <div class="col-md-4 todo-actions mt-2 text-right" [ngClass]="{'d-block':todo.showAction===true,'d-none':todo.showAction !==true}">
+                  <button class="btn btn-warning" *ngIf="todo.in_edit_mode!==true && todo.is_marked_done!==true" (click)="todo.in_edit_mode=true" >Edit</button>
+                  <button class="btn btn-success" *ngIf="todo.in_edit_mode===true" (click)="todo.in_edit_mode=false; updateTodo(todo)" >Update</button>
+                  <button class="btn btn-success" *ngIf="todo.in_edit_mode!==true && todo.is_marked_done!==true" (click)="markAsDone(todo)">Mark as Done</button>
+                  <button class="btn btn-danger" *ngIf="todo.in_edit_mode!==true" (click)="deleteTodo(todo)">Remove</button>
                 </div>
               </li>
               <!--<li class="row">-->
